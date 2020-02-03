@@ -2,6 +2,10 @@ package com.woodyzuill.refactor;
 
 public class Communicator {
     public Communicator(SecureDB db) {
+        checkConnection(db);
+    }
+
+    protected void checkConnection(SecureDB db) {
         if(!db.checkConnection()) {
             throw new RuntimeException();
         }

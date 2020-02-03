@@ -19,8 +19,11 @@ public class StockReport {
 
     // Use for testing Expose Static Method
     public void doStockDetailReport(Client client, String symbol, SecureDB db) {
-        Communicator dest = new Communicator(db);
-        final Stock locatedStock = Arrays.stream(client.stocks(db))
+        exposeStatic(symbol, new Communicator(db), client.stocks(db));
+    }
+
+    public static void exposeStatic(String symbol, Communicator dest, Stock[] stocks) {
+        final Stock locatedStock = Arrays.stream(stocks)
                 .filter(stock -> stock.getSymbol().equals(symbol))
                 .findFirst()
                 .get();
